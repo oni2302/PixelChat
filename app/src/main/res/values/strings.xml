@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pixel Chat</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="username">username</string>
+    <string name="edt_username">username</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logo">Logo</string>
+</resources>
