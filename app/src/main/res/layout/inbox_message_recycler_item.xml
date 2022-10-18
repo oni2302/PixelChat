@@ -52,7 +52,8 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/vt323"
                     android:text="Any"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/inbox_message_recycler_item_edtLastMessage"

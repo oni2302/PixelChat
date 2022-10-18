@@ -70,9 +70,7 @@ public class SignIn_Fragment extends Fragment {
                 mUser = mAuth.getCurrentUser();
                 String email = edt_signIn_Email.getText().toString();
                 String password = edt_signIn_Password.getText().toString();
-                email="phuongtky2003@gmail.com";
-                password = "onionioni";
-                if(emailCheck()&&passwordCheck()||true){
+                if(emailCheck()&&passwordCheck()){
                     tv_exception.setText("Signing in...");
                     mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

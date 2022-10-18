@@ -40,8 +40,8 @@ public class InboxItem {
     }
 
     public static ArrayList<InboxItem> test(){
-        String[] names = {"ONI","ONI","ONI","ONI","ONI","ONI","ONI","ONI","ONI","ONI"};
-        String[] lastMessages = {"ONI","ONI","ONI","ONI","ONI","ONI","ONI","ONI","ONI","ONI"};
+        String[] names = {"Em yêu 1","Em yêu 2","Em yêu 3","Em yêu 4","Em yêu 5","Em yêu 6","Em yêu 7","Em yêu 8","Em yêu 9","Em yêu 10"};
+        String[] lastMessages = {"Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!","Đêm qua anh tuyệt lắm!"};
         int[] pics = {
                 R.drawable.test_avt_img,
                 R.drawable.test_avt_img,
