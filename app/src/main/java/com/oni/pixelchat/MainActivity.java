@@ -8,9 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.oni.pixelchat.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private View view;
     Fragment welcome_Fragment
             ,signIn_Fragment
-            ,signUp_Fragment;
+            ,home_Fragment;
+    public static final String TAG = "ALO";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +32,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         welcome_Fragment = new Welcome_Fragment();
         signIn_Fragment = new SignIn_Fragment();
-        signUp_Fragment = new SignUp_Fragment();
+        home_Fragment = new Home_Fragment();
         DisplayFragment(welcome_Fragment);
         //delay logo 800ms
         final Handler handler = new Handler();
-        handler.postDelayed(() -> DisplayFragment(signIn_Fragment),800);
+        handler.postDelayed(() -> {
+            if(user==null){
+                DisplayFragment(signIn_Fragment);
+            }else{
+                Bundle b= new Bundle();
+                b.putString("email",user.getDisplayName());
+
+                Log.e(TAG,"ALLLLO"+user.getDisplayName());
+                DisplayFragment(home_Fragment);
+
+            }
+        },700);
 
     }
     private void DisplayFragment(Fragment fragment){

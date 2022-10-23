@@ -67,7 +67,6 @@ public class SignIn_Fragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth = FirebaseAuth.getInstance();
-                mUser = mAuth.getCurrentUser();
                 String email = edt_signIn_Email.getText().toString();
                 String password = edt_signIn_Password.getText().toString();
                 if(emailCheck()&&passwordCheck()){
@@ -76,6 +75,7 @@ public class SignIn_Fragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                mUser = mAuth.getCurrentUser();
                                 tv_exception.setText("Signing in successful");
                                 final Handler handler = new Handler();
                                 Fragment fragment = new Home_Fragment();
@@ -98,8 +98,8 @@ public class SignIn_Fragment extends Fragment {
     }
 
     private void DisplayFragment(Fragment fragment){
-        FragmentManager fragmentManager =getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+        FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack("SignInUp")
                 .setCustomAnimations(
                         R.anim.slide_in,
                         R.anim.fade_out,

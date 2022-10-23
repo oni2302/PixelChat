@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.AsyncListUtil.DataCallback;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.oni.pixelchat.databinding.FragmentSignUpBinding;
 
 public class SignUp_Fragment extends Fragment {
@@ -66,19 +70,37 @@ public class SignUp_Fragment extends Fragment {
             public void onClick(View v) {
                 String email = edt_SignUp_email.getText().toString();
                 String password = edt_SignUp_password.getText().toString();
+                String fName = edt_SignUp_firstName.getText().toString();
+                String lName = edt_SignUp_lastName.getText().toString();
                 mAuth = FirebaseAuth.getInstance();
-                mUser = mAuth.getCurrentUser();
                 if(emailCheck()&&passwordCheck()){
                     tv_exception.setText("signing up...");
                     mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                tv_exception.setText("Sign Up Completed");
-                                final Handler handler = new Handler();
-                                handler.postDelayed(()->tv_exception.setText("Direct to sign in..."),500);
-                                Fragment fragment = new SignIn_Fragment();
-                                handler.postDelayed(()->DisplayFragment(fragment),300);
+                                User user = new User(fName,lName);
+                                DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference("Users");
+                                try{
+                                    mUser = mAuth.getCurrentUser();
+                                    UserProfileChangeRequest update = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(lName).build();
+                                    mUser.updateProfile(update);
+                                    String s = mUser.getUid();
+                                dbReference.child(s).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        tv_exception.setText("Sign Up Completed");
+                                        final Handler handler = new Handler();
+                                        handler.postDelayed(()->tv_exception.setText("Direct to sign in..."),500);
+                                        Fragment fragment = new SignIn_Fragment();
+                                        handler.postDelayed(()->DisplayFragment(fragment),300);
+
+                                    }
+                                });
+                            }catch (Exception e){
+                                    Log.e("SignUp_Exception",e.toString());
+                                }
                             }
                             else{
                                 tv_exception.setText(""+task.getException().toString().substring(task.getException().toString().lastIndexOf(": ")+1));
@@ -116,7 +138,7 @@ public class SignUp_Fragment extends Fragment {
         return true;
     }
     private void DisplayFragment(Fragment fragment){
-        FragmentManager fragmentManager =getFragmentManager();
+        FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                 .setCustomAnimations(
                         R.anim.slide_in,

@@ -9,16 +9,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.oni.pixelchat.databinding.ActivityMainBinding;
+import com.oni.pixelchat.databinding.FragmentInboxBinding;
+
 import java.util.ArrayList;
 
-public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.ViewHolder>{
+public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.ViewHolder> {
     Context context;
     int layout;
     ArrayList<InboxItem> arrayList;
-
     public InboxItemAdapter(Context context, int layout, ArrayList<InboxItem> arrayList) {
         this.context = context;
         this.layout = layout;
@@ -39,11 +46,16 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
         holder.inbox_message_recycler_item_imgMain.setImageResource(inboxItem.getPic());
         holder.inbox_message_recycler_item_edtName.setText(inboxItem.getName());
         holder.inbox_message_recycler_item_edtLastMessage.setText(inboxItem.getLastMessage());
+        Bundle b = new Bundle();
+        b.putString("Username",inboxItem.getUserName());
+        b.putString("Name",inboxItem.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("itemInboxItem",inboxItem.getName());
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment fragment = new InboxFragment();
+                fragment.setArguments(b);
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.container_main_activity,fragment).addToBackStack("Home-Inbox").commit();
             }
         });
     }
@@ -66,4 +78,5 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
 
         }
     }
+
 }

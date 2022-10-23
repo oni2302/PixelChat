@@ -9,6 +9,16 @@ public class InboxItem {
     String name;
     String lastMessage;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    String userName;
+
     public InboxItem(int pic, String name, String lastMessage) {
         this.pic = pic;
         this.name = name;
