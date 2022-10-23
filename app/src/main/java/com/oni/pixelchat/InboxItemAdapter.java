@@ -1,6 +1,7 @@
 package com.oni.pixelchat;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,13 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
         holder.inbox_message_recycler_item_imgMain.setImageResource(inboxItem.getPic());
         holder.inbox_message_recycler_item_edtName.setText(inboxItem.getName());
         holder.inbox_message_recycler_item_edtLastMessage.setText(inboxItem.getLastMessage());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("itemInboxItem",inboxItem.getName());
+            }
+        });
     }
 
     @Override
