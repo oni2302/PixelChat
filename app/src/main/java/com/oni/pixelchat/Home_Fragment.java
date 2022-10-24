@@ -48,7 +48,7 @@ public class Home_Fragment extends Fragment {
         tv_home_displayname = binding.tvHomeDisplayname;
         Date dt = new Date();
 
-        int hour = (int)(dt.getTime()/3600000)%24;
+        int hour = (int)(dt.getTime()/3600000)%24+7;
         if(hour>=18 &&hour<=5){
             tv_home_displayname.setText("Chào buổi tối, "+mUser.getDisplayName());
         }else if(hour>5 &&hour<=10){

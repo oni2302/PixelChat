@@ -6,7 +6,12 @@ plugins {
 android {
     namespace 'com.oni.pixelchat'
     compileSdk 32
-
+    dataBinding{
+        enable = true
+    }
+    viewBinding{
+        enable = true
+    }
     defaultConfig {
         applicationId "com.oni.pixelchat"
         minSdk 21
@@ -24,8 +29,8 @@ android {
         }
     }
     buildFeatures{
-        viewBinding true
-        dataBinding true
+        dataBinding = true
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

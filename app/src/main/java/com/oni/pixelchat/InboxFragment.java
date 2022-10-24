@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,14 @@ import android.view.ViewGroup;
 
 import com.oni.pixelchat.databinding.FragmentInboxBinding;
 
+import java.util.ArrayList;
+
 public class InboxFragment extends Fragment {
     FragmentInboxBinding binding;
+    RecyclerView message_box;
+    RecyclerView.LayoutManager layoutManager;
+    ArrayList<MessageItem> arrayList;
+    MessageInboxAdapter adapter;
     public InboxFragment() {
         // Required empty public constructor
     }
@@ -27,15 +35,22 @@ public class InboxFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentInboxBinding.inflate(inflater,container,false);
+        message_box=binding.messageBox;
+        layoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false);
+        message_box.setLayoutManager(layoutManager);
+
         Bundle b = this.getArguments();
         String username = b.getString("Username");
         String name = b.getString("Name");
         binding.tvInboxName.setText(name);
+        arrayList = MessageItem.test();
+        adapter = new MessageInboxAdapter(InboxFragment.this.getContext(),R.layout.message_item_layout,arrayList);
+        message_box.setAdapter(adapter);
         // Inflate the layout for this fragment
         return binding.getRoot();
     }
     public void DisplayFragment(Fragment fragment){
-        FragmentManager fragmentManager =getFragmentManager();
+        FragmentManager fragmentManager =getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
                 .setCustomAnimations(
                         R.anim.slide_in,
