@@ -3,6 +3,7 @@ package com.oni.pixelchat;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,6 +18,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oni.pixelchat.databinding.FragmentHomeBinding;
 
 import java.time.Clock;
@@ -28,7 +34,7 @@ public class Home_Fragment extends Fragment {
     private CardView avatar_warping;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<InboxItem> inboxItemList;
+    private ArrayList<User> userArrayList;
     private InboxItemAdapter inboxItemAdapter;
     private CardView btn_home_sign_out;
     private FirebaseUser mUser;
@@ -61,9 +67,9 @@ public class Home_Fragment extends Fragment {
         recyclerView = binding.inboxMessageRecycler;
         layoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        inboxItemList = InboxItem.test();
-        inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,inboxItemList);
-        recyclerView.setAdapter(inboxItemAdapter);
+
+        userArrayList = new ArrayList<>();
+        ReadUsers();
         btn_home_sign_out = binding.btnHomeSignOut;
         btn_home_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +80,6 @@ public class Home_Fragment extends Fragment {
                 DisplayFragment(f);
             }
         });
-
         return binding.getRoot();
     }
     private void DisplayFragment(Fragment fragment){
@@ -89,6 +94,31 @@ public class Home_Fragment extends Fragment {
 
         fragmentTransaction.replace(R.id.container_main_activity,fragment);
         fragmentTransaction.commit();
+    }
+    private void ReadUsers(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        ValueEventListener read = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userArrayList.clear();
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    User user = snapshot.getValue(User.class);
+                    assert user !=null;
+                    assert mUser!=null;
+                    if(!user.getId().equals(mUser.getUid())){
+                        userArrayList.add(user);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        reference.addValueEventListener(read);
+        inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,userArrayList);
+        recyclerView.setAdapter(inboxItemAdapter);
     }
 
 }

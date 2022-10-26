@@ -2,6 +2,7 @@ package com.oni.pixelchat;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,6 +23,7 @@ public class InboxFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     ArrayList<MessageItem> arrayList;
     MessageInboxAdapter adapter;
+    CardView btn_send;
     public InboxFragment() {
         // Required empty public constructor
     }
@@ -40,13 +42,20 @@ public class InboxFragment extends Fragment {
         message_box.setLayoutManager(layoutManager);
 
         Bundle b = this.getArguments();
-        String username = b.getString("Username");
         String name = b.getString("Name");
         binding.tvInboxName.setText(name);
         arrayList = MessageItem.test();
         adapter = new MessageInboxAdapter(InboxFragment.this.getContext(),R.layout.message_item_layout,arrayList);
         message_box.setAdapter(adapter);
         // Inflate the layout for this fragment
+        btn_send = binding.btnSend;
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return binding.getRoot();
     }
     public void DisplayFragment(Fragment fragment){

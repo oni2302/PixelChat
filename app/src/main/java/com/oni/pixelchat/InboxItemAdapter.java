@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.oni.pixelchat.databinding.ActivityMainBinding;
 import com.oni.pixelchat.databinding.FragmentInboxBinding;
 
@@ -25,8 +27,8 @@ import java.util.ArrayList;
 public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.ViewHolder> {
     Context context;
     int layout;
-    ArrayList<InboxItem> arrayList;
-    public InboxItemAdapter(Context context, int layout, ArrayList<InboxItem> arrayList) {
+    ArrayList<User> arrayList;
+    public InboxItemAdapter(Context context, int layout, ArrayList<User> arrayList) {
         this.context = context;
         this.layout = layout;
         this.arrayList = arrayList;
@@ -42,13 +44,14 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        InboxItem inboxItem = arrayList.get(position);
-        holder.inbox_message_recycler_item_imgMain.setImageResource(inboxItem.getPic());
-        holder.inbox_message_recycler_item_edtName.setText(inboxItem.getName());
-        holder.inbox_message_recycler_item_edtLastMessage.setText(inboxItem.getLastMessage());
+        User user = arrayList.get(position);
+        String name,lastMess="";
+        name =user.getId();
+        holder.inbox_message_recycler_item_imgMain.setImageResource(R.drawable.test_avt_img);
+        holder.inbox_message_recycler_item_edtName.setText(name);
+        holder.inbox_message_recycler_item_edtLastMessage.setText(lastMess);
         Bundle b = new Bundle();
-        b.putString("Username",inboxItem.getUserName());
-        b.putString("Name",inboxItem.getName());
+        b.putString("Name",name);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

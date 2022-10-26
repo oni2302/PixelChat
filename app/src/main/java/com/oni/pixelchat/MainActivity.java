@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment welcome_Fragment
             ,signIn_Fragment
             ,home_Fragment;
-    public static final String TAG = "ALO";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +43,10 @@ public class MainActivity extends AppCompatActivity {
             if(user==null){
                 DisplayFragment(signIn_Fragment);
             }else{
-                Bundle b= new Bundle();
-                b.putString("email",user.getDisplayName());
-
-                Log.e(TAG,"ALLLLO"+user.getDisplayName());
                 DisplayFragment(home_Fragment);
 
             }
-        },700);
+        },500);
 
     }
     private void DisplayFragment(Fragment fragment){

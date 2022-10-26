@@ -79,7 +79,7 @@ public class SignUp_Fragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                User user = new User(fName,lName);
+                                User user = new User(mAuth.getCurrentUser().getUid(),fName,lName);
                                 DatabaseReference dbReference = FirebaseDatabase.getInstance().getReference("Users");
                                 try{
                                     mUser = mAuth.getCurrentUser();

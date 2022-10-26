@@ -3,18 +3,13 @@ package com.oni.pixelchat;
 public class User {
     String fName
             ,lName
-            ,phone="";
+            ,phone=""
+            ,id;
     int day=-1,month=-1,year=-1;
     int gender=-1;
 
-    public User(String phone, int day, int month, int year, int gender) {
-        this.phone = phone;
-        this.day = day;
-        this.month = month;
-        this.year = year;
-        this.gender = gender;
+    public User() {
     }
-
     public User(int gender) {
         this.gender = gender;
     }
@@ -29,9 +24,21 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String fName, String lName) {
+    public User(String id,String fName, String lName) {
         this.fName = fName;
         this.lName = lName;
+        this.id = id;
+    }
+
+    public User(String fName, String lName, String phone, String id, int day, int month, int year, int gender) {
+        this.fName = fName;
+        this.lName = lName;
+        this.phone = phone;
+        this.id = id;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.gender = gender;
     }
 
     public String getfName() {
@@ -90,6 +97,11 @@ public class User {
         this.gender = gender;
     }
 
-    public User() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
