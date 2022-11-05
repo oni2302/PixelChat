@@ -46,12 +46,13 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = arrayList.get(position);
         String name,lastMess="";
-        name =user.getId();
+        name =user.getfName()+" "+user.getlName();
         holder.inbox_message_recycler_item_imgMain.setImageResource(R.drawable.test_avt_img);
         holder.inbox_message_recycler_item_edtName.setText(name);
         holder.inbox_message_recycler_item_edtLastMessage.setText(lastMess);
         Bundle b = new Bundle();
         b.putString("Name",name);
+        b.putString("UID",user.getId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -35,7 +35,7 @@ public class MessageInboxAdapter extends RecyclerView.Adapter<MessageInboxAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageItem messageItem = arrayList.get(position);
-        holder.messageItemLayoutBinding.setMessages(messageItem);
+        holder.messageItemLayoutBinding.setMessageItem(messageItem);
     }
 
     @Override

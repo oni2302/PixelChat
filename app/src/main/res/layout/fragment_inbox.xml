@@ -27,16 +27,17 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
         </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/message_box"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent"
+                android:id="@+id/swiperefresh">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/message_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 
     <androidx.cardview.widget.CardView

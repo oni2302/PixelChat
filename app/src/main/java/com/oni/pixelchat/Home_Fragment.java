@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,11 +35,13 @@ public class Home_Fragment extends Fragment {
     private FragmentHomeBinding binding;
     private CardView avatar_warping;
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
+
+    LinearLayoutManager layoutManager;
     private ArrayList<User> userArrayList;
     private InboxItemAdapter inboxItemAdapter;
     private CardView btn_home_sign_out;
     private FirebaseUser mUser;
+    private String uid;
     private TextView tv_home_displayname;
     public Home_Fragment() {
         // Required empty public constructor
@@ -50,6 +54,7 @@ public class Home_Fragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
         mUser= FirebaseAuth.getInstance().getCurrentUser();
+        uid = FirebaseAuth.getInstance().getUid();
         // Inflate the layout for this fragment
         tv_home_displayname = binding.tvHomeDisplayname;
         Date dt = new Date();
@@ -67,8 +72,10 @@ public class Home_Fragment extends Fragment {
         recyclerView = binding.inboxMessageRecycler;
         layoutManager = new LinearLayoutManager(this.getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-
         userArrayList = new ArrayList<>();
+        userArrayList.clear();
+        inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,userArrayList);
+        recyclerView.setAdapter(inboxItemAdapter);
         ReadUsers();
         btn_home_sign_out = binding.btnHomeSignOut;
         btn_home_sign_out.setOnClickListener(new View.OnClickListener() {
@@ -96,11 +103,12 @@ public class Home_Fragment extends Fragment {
         fragmentTransaction.commit();
     }
     private void ReadUsers(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-        ValueEventListener read = new ValueEventListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Users");
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userArrayList.clear();
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                     User user = snapshot.getValue(User.class);
                     assert user !=null;
@@ -109,16 +117,14 @@ public class Home_Fragment extends Fragment {
                         userArrayList.add(user);
                     }
                 }
+                inboxItemAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        };
-        reference.addValueEventListener(read);
-        inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,userArrayList);
-        recyclerView.setAdapter(inboxItemAdapter);
+        });
     }
 
 }

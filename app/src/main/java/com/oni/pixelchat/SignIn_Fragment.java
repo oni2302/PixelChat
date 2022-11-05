@@ -28,7 +28,6 @@ public class SignIn_Fragment extends Fragment {
 
     FragmentSignInBinding binding;
     FirebaseAuth mAuth;
-    FirebaseUser mUser;
     EditText edt_signIn_Email
             ,edt_signIn_Password;
     TextView move_to_signUp
@@ -75,7 +74,6 @@ public class SignIn_Fragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                mUser = mAuth.getCurrentUser();
                                 tv_exception.setText("Signing in successful");
                                 final Handler handler = new Handler();
                                 Fragment fragment = new Home_Fragment();

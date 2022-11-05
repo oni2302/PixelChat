@@ -32,21 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         welcome_Fragment = new Welcome_Fragment();
-        signIn_Fragment = new SignIn_Fragment();
-        home_Fragment = new Home_Fragment();
         DisplayFragment(welcome_Fragment);
-        //delay logo 800ms
-        final Handler handler = new Handler();
-        handler.postDelayed(() -> {
-            if(user==null){
-                DisplayFragment(signIn_Fragment);
-            }else{
-                DisplayFragment(home_Fragment);
-
-            }
-        },500);
 
     }
     private void DisplayFragment(Fragment fragment){
