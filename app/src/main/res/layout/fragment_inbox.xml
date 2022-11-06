@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,67 +27,169 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
         </androidx.cardview.widget.CardView>
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/swiperefresh">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/message_box"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swiperefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/message_box"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="5dp"
+        android:gravity="right"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_inbox_send"
         app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            app:cardBackgroundColor="#000000"
-            app:cardCornerRadius="100dp">
+            android:layout_gravity="center|left">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_icon" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_icon" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image_icon" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="5dp">
 
             <EditText
                 android:id="@+id/edt_inbox_message"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
                 android:background="#FFFFFF"
                 android:ems="10"
                 android:fontFamily="@font/vt323"
-                android:inputType="textPersonName"
+                android:hint="Nhắn tin"
+                android:inputType="textMultiLine|textPersonName"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
-                android:paddingRight="5dp"
+                android:paddingRight="@dimen/pixel_margin"
                 android:paddingBottom="5dp"
-                android:text="Name" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
-            app:cardBackgroundColor="#635C5C"
-            app:cardCornerRadius="10dp">
+                android:textSize="12sp" />
 
             <ImageView
-                android:id="@+id/btn_inbox_send"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@android:drawable/ic_menu_send" />
-        </androidx.cardview.widget.CardView>
+                android:id="@+id/dot_top_right"
+                android:layout_width="@dimen/pixel_size"
+                android:layout_height="@dimen/pixel_size"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/pixel_size"
+                android:layout_marginRight="@dimen/pixel_size"
+                app:srcCompat="@drawable/black_bg" />
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/dot_bottom_right"
+                android:layout_width="@dimen/pixel_size"
+                android:layout_height="@dimen/pixel_size"
+                android:layout_gravity="bottom|right"
+                android:layout_marginRight="@dimen/pixel_size"
+                android:layout_marginBottom="@dimen/pixel_size"
+                app:srcCompat="@drawable/black_bg" />
+
+            <ImageView
+                android:id="@+id/stroke_right"
+                android:layout_width="@dimen/pixel_size"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/pixel_margin"
+                android:layout_marginBottom="@dimen/pixel_margin"
+                app:srcCompat="@drawable/black_bg" />
+
+            <ImageView
+                android:id="@+id/stroke_left"
+                android:layout_width="@dimen/pixel_size"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/pixel_margin"
+                android:layout_marginBottom="@dimen/pixel_margin"
+                app:srcCompat="@drawable/black_bg" />
+
+            <ImageView
+                android:id="@+id/dot_bottom_left"
+                android:layout_width="@dimen/pixel_size"
+                android:layout_height="@dimen/pixel_size"
+                android:layout_gravity="bottom|left"
+                android:layout_marginLeft="@dimen/pixel_size"
+                android:layout_marginBottom="@dimen/pixel_size"
+                app:srcCompat="@drawable/black_bg" />
+
+            <ImageView
+                android:id="@+id/dot_top_left"
+                android:layout_width="@dimen/pixel_size"
+                android:layout_height="@dimen/pixel_size"
+                android:layout_gravity="top|left"
+                android:layout_marginLeft="@dimen/pixel_size"
+                android:layout_marginTop="@dimen/pixel_size"
+                app:srcCompat="@drawable/black_bg" />
+
+            <ImageView
+                android:id="@+id/stroke_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/pixel_size"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="@dimen/pixel_margin"
+                android:layout_marginRight="@dimen/pixel_margin"
+                app:srcCompat="@drawable/black_bg" />
+
+            <ImageView
+                android:id="@+id/stroke_top"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/pixel_size"
+                android:layout_gravity="top"
+                android:layout_marginLeft="@dimen/pixel_margin"
+                android:layout_marginRight="@dimen/pixel_margin"
+                app:srcCompat="@drawable/black_bg" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_inbox_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@android:drawable/ic_menu_send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

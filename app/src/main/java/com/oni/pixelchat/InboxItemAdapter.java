@@ -2,6 +2,7 @@ package com.oni.pixelchat;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oni.pixelchat.databinding.ActivityMainBinding;
 import com.oni.pixelchat.databinding.FragmentInboxBinding;
 
@@ -28,6 +34,7 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
     Context context;
     int layout;
     ArrayList<User> arrayList;
+    User user;
     public InboxItemAdapter(Context context, int layout, ArrayList<User> arrayList) {
         this.context = context;
         this.layout = layout;
@@ -44,7 +51,7 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = arrayList.get(position);
+        user = arrayList.get(position);
         String name,lastMess="";
         name =user.getfName()+" "+user.getlName();
         holder.inbox_message_recycler_item_imgMain.setImageResource(R.drawable.test_avt_img);
@@ -81,6 +88,23 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
             inbox_message_recycler_item_edtLastMessage = v.findViewById(R.id.inbox_message_recycler_item_edtLastMessage);
 
         }
+    }
+    public String ReadLastMessage(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Messages").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(user.getId());
+        reference.limitToLast(1).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return "";
     }
 
 }

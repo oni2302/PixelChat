@@ -117,7 +117,8 @@ public class Home_Fragment extends Fragment {
                         userArrayList.add(user);
                     }
                 }
-                inboxItemAdapter.notifyDataSetChanged();
+                inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,userArrayList);
+                recyclerView.setAdapter(inboxItemAdapter);
             }
 
             @Override

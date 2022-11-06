@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,12 +36,13 @@ public class InboxFragment extends Fragment {
     LinearLayoutManager layoutManager;
     ArrayList<MessageItem> arrayList;
     MessageInboxAdapter adapter;
-    CardView btn_send;
+    ImageView btn_send;
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
     String uid;
     SwipeRefreshLayout swipeRefreshLayout;
     EditText edt_inbox_message;
+    int message_position;
     int amountMessase =20;
     public InboxFragment() {
         // Required empty public constructor
@@ -71,7 +73,7 @@ public class InboxFragment extends Fragment {
         adapter = new MessageInboxAdapter(InboxFragment.this.getContext(),R.layout.message_item_layout,arrayList);
         message_box.setAdapter(adapter);
         // Inflate the layout for this fragment
-        btn_send = binding.btnSend;
+        btn_send = binding.btnInboxSend;
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,21 +81,22 @@ public class InboxFragment extends Fragment {
                 SendMessage("Nhà cái đến từ châu Âu uy tín hàng đầu Vịt Lam\nBạn có muốn làm giàu chỉ với 2 bàn tay trắng\n Đến với chúng tôi!\n\n"+edt_inbox_message.getText().toString(),date.getTime());
             }
         });
-        ReadMessage(amountMessase);
-
+        ReadMessage();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(amountMessase<arrayList.size()+amountMessase){
+                if(amountMessase<arrayList.size()+1){
                     amountMessase+=20;
-                    ReadMessage(amountMessase);
+                    message_position = layoutManager.findFirstVisibleItemPosition();
+                    ReadMessage();
+                    message_box.scrollToPosition(message_position-20);
                 }
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
         return binding.getRoot();
     }
-    public void ReadMessage(int amountMessase){
+    public void ReadMessage(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Messages").child(firebaseUser.getUid()).child(uid);
 
@@ -106,7 +109,8 @@ public class InboxFragment extends Fragment {
                     MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
                     arrayList.add(messageItem);
                 }
-                adapter.notifyDataSetChanged();
+                adapter = new MessageInboxAdapter(InboxFragment.this.getContext(),R.layout.message_item_layout,arrayList);
+                message_box.setAdapter(adapter);
             }
 
             @Override
@@ -136,5 +140,6 @@ public class InboxFragment extends Fragment {
         messageItem = new MessageItem(message,false,false,date);
         reference = database.getReference("Messages").child(uid).child(firebaseUser.getUid());
         reference.push().setValue(messageItem);
+        amountMessase = 20;
     }
 }
