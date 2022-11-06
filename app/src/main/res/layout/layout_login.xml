@@ -110,7 +110,7 @@
     <Button
         android:id="@+id/btn_signIn"
         android:layout_width="109dp"
-        android:layout_height="42dp"
+        android:layout_height="48dp"
         android:layout_marginStart="148dp"
         android:layout_marginTop="32dp"
         android:foreground="@drawable/l_arrow_btn"

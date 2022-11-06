@@ -10,16 +10,16 @@
     <EditText
         android:id="@+id/edt_SignUp_firstName"
         android:layout_width="112dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="59dp"
         android:layout_marginTop="165dp"
         android:background="#FFFFFF"
         android:ems="10"
         android:fontFamily="@font/silkscreen"
+        android:hint="Enter First"
         android:inputType="textPersonName"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:text="b"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imageEmail"
         android:layout_width="297dp"
         android:layout_height="60dp"
         android:layout_marginTop="244dp"
@@ -143,17 +143,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/imageReEnterPass" />
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/imageReEnterPass"
         android:layout_width="297dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/border1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/imagePass" />
 
     <TextView
         android:id="@+id/textView11"
@@ -182,14 +182,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/imagePass"
         android:layout_width="297dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/border1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintTop_toBottomOf="@+id/imageEmail" />
 
     <Button
         android:id="@+id/btn_SignUp"
@@ -199,7 +199,7 @@
         android:foreground="@drawable/l_arrow_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/imageReEnterPass" />
 
     <TextView
         android:id="@+id/textView8"
@@ -228,7 +228,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageFirstName"
         android:layout_width="132dp"
         android:layout_height="57dp"
         android:layout_marginTop="160dp"
@@ -239,7 +239,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageLastName"
         android:layout_width="157dp"
         android:layout_height="57dp"
         android:layout_marginTop="160dp"
