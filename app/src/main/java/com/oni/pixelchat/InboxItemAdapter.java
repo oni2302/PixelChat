@@ -33,9 +33,10 @@ import java.util.ArrayList;
 public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.ViewHolder> {
     Context context;
     int layout;
-    ArrayList<User> arrayList;
+    ArrayList<User_Message> arrayList;
     User user;
-    public InboxItemAdapter(Context context, int layout, ArrayList<User> arrayList) {
+    String lastMessage;
+    public InboxItemAdapter(Context context, int layout, ArrayList<User_Message> arrayList) {
         this.context = context;
         this.layout = layout;
         this.arrayList = arrayList;
@@ -51,12 +52,13 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        user = arrayList.get(position);
-        String name,lastMess="";
+        user = arrayList.get(position).getUser();
+        String name;
         name =user.getfName()+" "+user.getlName();
+        lastMessage = arrayList.get(position).getMessage();
         holder.inbox_message_recycler_item_imgMain.setImageResource(R.drawable.test_avt_img);
         holder.inbox_message_recycler_item_edtName.setText(name);
-        holder.inbox_message_recycler_item_edtLastMessage.setText(lastMess);
+        holder.inbox_message_recycler_item_edtLastMessage.setText(lastMessage);
         Bundle b = new Bundle();
         b.putString("Name",name);
         b.putString("UID",user.getId());
@@ -88,23 +90,6 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
             inbox_message_recycler_item_edtLastMessage = v.findViewById(R.id.inbox_message_recycler_item_edtLastMessage);
 
         }
-    }
-    public String ReadLastMessage(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("Messages").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(user.getId());
-        reference.limitToLast(1).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return "";
     }
 
 }
