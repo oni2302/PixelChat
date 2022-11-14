@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <import type="android.view.Gravity"></import>
+        <import type="android.view.View"></import>
 
         <variable
             name="MessageItem"
@@ -24,11 +26,25 @@
             android:paddingLeft="@{MessageItem.isSend? @dimen/message_margin: @dimen/five_dp}"
             android:paddingTop="5dp"
             android:paddingRight="@{MessageItem.isSend?@dimen/five_dp :@dimen/message_margin }"
-            android:paddingBottom="5dp">
+            android:paddingBottom="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/pixel_size"
+                    android:layout_marginTop="@dimen/pixel_size"
+                    android:layout_marginRight="@dimen/pixel_size"
+                    android:layout_marginBottom="@dimen/pixel_size"
+                    android:visibility='@{MessageItem.isPicture? View.VISIBLE:View.GONE}'
+                    tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageView
                     android:id="@+id/background"
@@ -123,7 +139,9 @@
                     android:paddingRight="8dp"
                     android:paddingBottom="5dp"
                     android:text="@{MessageItem.message}"
-                    android:textColor="@{MessageItem.isSend? @color/text_white:@color/text_black}" />
+                    android:textColor="@{MessageItem.isSend? @color/text_white:@color/text_black}"
+                    android:textSize="16sp"
+                    android:visibility='@{MessageItem.isPicture?View.GONE:View.VISIBLE}' />
 
             </FrameLayout>
 

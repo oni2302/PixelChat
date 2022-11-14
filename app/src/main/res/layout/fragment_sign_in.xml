@@ -7,17 +7,201 @@
     android:layout_height="match_parent"
     tools:context=".SignIn_Fragment">
 
+    <FrameLayout
+        android:layout_width="274dp"
+        android:layout_height="47dp"
+        android:layout_gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <EditText
+            android:id="@+id/edt_signIn_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:hint="Email"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp"
+            tools:ignore="DuplicateIds" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout4"
+        android:layout_width="305dp"
+        android:layout_height="50dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <EditText
+            android:id="@+id/edt_signIn_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:hint="Nhắn tin"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
+
     <TextView
         android:id="@+id/tv_exception_SignIn"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="432dp"
+        android:layout_marginTop="440dp"
         android:fontFamily="@font/silkscreen"
         android:text="anything"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toEndOf="@+id/img_exception_SignIn"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,45 +209,12 @@
         android:id="@+id/img_exception_SignIn"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginTop="436dp"
         android:src="@drawable/warning_ico"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edt_signIn_Password"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="370dp"
-        android:background="@drawable/white_bg"
-        android:drawableRight="@drawable/visible_icon"
-        android:ems="10"
-        android:fontFamily="@font/vt323"
-        android:hint="PASSWORD"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        android:paddingLeft="15dp"
-        android:paddingRight="10dp"
-        android:text="11111111"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="292dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="368dp"
-        android:contentDescription="TODO"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/border1" />
 
     <TextView
         android:id="@+id/textView4"
@@ -92,38 +243,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edt_signIn_Email"
-        android:layout_width="280dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="288dp"
-        android:background="@drawable/white_bg"
-        android:ems="10"
-        android:fontFamily="@font/vt323"
-        android:hint="EMAIL"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:text="phuong@gmail.com"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="DuplicateSpeakableTextCheck" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="292dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="284dp"
-        android:contentDescription="TODO"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/border1" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -142,13 +261,13 @@
         android:id="@+id/btn_signIn"
         android:layout_width="109dp"
         android:layout_height="48dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="28dp"
         android:foreground="@drawable/l_arrow_btn"
         android:textColorLink="#00FFFFFF"
         android:textCursorDrawable="@drawable/l_arrow_btn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_signIn_Password" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_exception_SignIn" />
 
     <TextView
         android:id="@+id/move_to_SignUp"

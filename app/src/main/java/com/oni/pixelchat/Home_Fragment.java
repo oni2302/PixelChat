@@ -37,8 +37,7 @@ public class Home_Fragment extends Fragment {
     private RecyclerView recyclerView;
 
     LinearLayoutManager layoutManager;
-    private ArrayList<User_Message> userArrayList;
-    private User_Message user_message;
+    private ArrayList<User> userArrayList;
     private InboxItemAdapter inboxItemAdapter;
     private CardView btn_home_sign_out;
     private FirebaseUser mUser;
@@ -59,7 +58,6 @@ public class Home_Fragment extends Fragment {
         // Inflate the layout for this fragment
         tv_home_displayname = binding.tvHomeDisplayname;
         Date dt = new Date();
-        user_message = new User_Message();
         int hour = (int)(dt.getTime()/3600000)%24+7;
         if(hour>=18 &&hour<=5){
             tv_home_displayname.setText("Chào buổi tối, "+mUser.getDisplayName());
@@ -114,33 +112,12 @@ public class Home_Fragment extends Fragment {
                     assert user !=null;
                     assert mUser!=null;
                     if(!user.getId().equals(mUser.getUid())){
-                        user_message.setUser(user);
-                        DatabaseReference referenceMess = database.getReference("Messages").child(mUser.getUid()).child(user.getId());
-                        referenceMess.limitToLast(1).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot key: snapshot.getChildren()){
-                                    for (DataSnapshot mess:key.getChildren()){
-                                        if(mess.getKey().equals("message")){
-                                            user_message.setMessage(mess.getValue(String.class));
-                                            assert user_message!=null;
-                                            userArrayList.add(user_message);
-                                        }
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        userArrayList.add(user);
                     }
                 }
                 inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,userArrayList);
                 recyclerView.setAdapter(inboxItemAdapter);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

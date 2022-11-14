@@ -60,9 +60,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginRight="100dp"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/vt323"
                     android:text="Any"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textColor="#717171" />
             </LinearLayout>
         </LinearLayout>

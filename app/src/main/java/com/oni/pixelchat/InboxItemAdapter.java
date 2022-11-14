@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -33,10 +35,10 @@ import java.util.ArrayList;
 public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.ViewHolder> {
     Context context;
     int layout;
-    ArrayList<User_Message> arrayList;
+    ArrayList<User> arrayList;
     User user;
-    String lastMessage;
-    public InboxItemAdapter(Context context, int layout, ArrayList<User_Message> arrayList) {
+
+    public InboxItemAdapter(Context context, int layout, ArrayList<User> arrayList) {
         this.context = context;
         this.layout = layout;
         this.arrayList = arrayList;
@@ -52,13 +54,28 @@ public class InboxItemAdapter extends RecyclerView.Adapter<InboxItemAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        user = arrayList.get(position).getUser();
+        user = arrayList.get(position);
         String name;
         name =user.getfName()+" "+user.getlName();
-        lastMessage = arrayList.get(position).getMessage();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Messages").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.child(user.getId()).limitToLast(1).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if(task.isSuccessful()){
+                    DataSnapshot snapshot = task.getResult();
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+                        Log.d("DEBUG",dataSnapshot.getValue().toString());
+                        MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
+                        holder.inbox_message_recycler_item_edtLastMessage.setText(messageItem.getMessage());
+                    }
+                }
+                else{
+
+                }
+            }
+        });
         holder.inbox_message_recycler_item_imgMain.setImageResource(R.drawable.test_avt_img);
         holder.inbox_message_recycler_item_edtName.setText(name);
-        holder.inbox_message_recycler_item_edtLastMessage.setText(lastMessage);
         Bundle b = new Bundle();
         b.putString("Name",name);
         b.putString("UID",user.getId());

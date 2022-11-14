@@ -7,107 +7,471 @@
     android:layout_height="match_parent"
     tools:context=".SignUp_Fragment">
 
-    <EditText
-        android:id="@+id/edt_SignUp_firstName"
-        android:layout_width="112dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="165dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:fontFamily="@font/silkscreen"
-        android:hint="Enter First"
-        android:inputType="textPersonName"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:textColor="#000000"
-        android:textSize="12sp"
+    <FrameLayout
+        android:id="@+id/fname"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toStartOf="@+id/lname"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-    <EditText
-        android:id="@+id/edt_SignUp_lastName"
-        android:layout_width="139dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="213dp"
-        android:layout_marginTop="165dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:fontFamily="@font/silkscreen"
-        android:inputType="textPersonName"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="p"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/edt_SignUp_firstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/edt_SignUp_password"
-        android:layout_width="278dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="332dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:fontFamily="@font/silkscreen"
-        android:inputType="textPassword"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="00000000"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
 
-    <EditText
-        android:id="@+id/edt_SignUp_rePassword"
-        android:layout_width="278dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="412dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:fontFamily="@font/silkscreen"
-        android:inputType="textPassword"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="00000000"
-        android:textColor="#000000"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
 
-    <EditText
-        android:id="@+id/edt_SignUp_email"
-        android:layout_width="278dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="252dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:fontFamily="@font/silkscreen"
-        android:inputType="textPersonName"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:text="phuongtky2003@gmail.com"
-        android:textColor="#000000"
-        android:textSize="12sp"
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/lname"
+        android:layout_width="105dp"
+        android:layout_height="45dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+        <EditText
+            android:id="@+id/edt_SignUp_lastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/email"
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <EditText
+            android:id="@+id/edt_SignUp_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/pass"
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <EditText
+            android:id="@+id/edt_SignUp_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/configPass"
+        android:layout_width="276dp"
+        android:layout_height="45dp"
+        android:layout_gravity="left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <EditText
+            android:id="@+id/edt_SignUp_rePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="#FFFFFF"
+            android:ems="10"
+            android:fontFamily="@font/vt323"
+            android:inputType="textMultiLine|textPersonName"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:paddingRight="@dimen/pixel_margin"
+            android:paddingBottom="5dp"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_size"
+            android:layout_marginRight="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/pixel_margin"
+            android:layout_marginBottom="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginBottom="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="@dimen/pixel_size"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top|left"
+            android:layout_marginLeft="@dimen/pixel_size"
+            android:layout_marginTop="@dimen/pixel_size"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pixel_size"
+            android:layout_gravity="top"
+            android:layout_marginLeft="@dimen/pixel_margin"
+            android:layout_marginRight="@dimen/pixel_margin"
+            app:srcCompat="@drawable/black_bg" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="148dp"
         android:fontFamily="@font/silkscreen"
         android:text="last name"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintHorizontal_bias="0.721"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,103 +480,73 @@
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="475dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/silkscreen"
         android:text="anything"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageEmail"
-        android:layout_width="297dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="244dp"
-        android:src="@drawable/border1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/configPass" />
 
     <ImageView
         android:id="@+id/img_exception"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="9dp"
         android:src="@drawable/warning_ico"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageReEnterPass" />
-
-    <ImageView
-        android:id="@+id/imageReEnterPass"
-        android:layout_width="297dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/border1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagePass" />
+        app:layout_constraintTop_toBottomOf="@+id/configPass" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginTop="17dp"
         android:fontFamily="@font/silkscreen"
         android:text="re-enter password"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pass" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
-        android:layout_marginTop="312dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/silkscreen"
         android:text="password"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imagePass"
-        android:layout_width="297dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/border1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <Button
         android:id="@+id/btn_SignUp"
         android:layout_width="95dp"
         android:layout_height="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="23dp"
         android:foreground="@drawable/l_arrow_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageReEnterPass" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_exception" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="228dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/silkscreen"
         android:text="email"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/fname" />
 
     <TextView
         android:id="@+id/textView5"
@@ -227,39 +561,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageFirstName"
-        android:layout_width="132dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="160dp"
-        android:src="@drawable/border4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageLastName"
-        android:layout_width="157dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="160dp"
-        android:src="@drawable/border2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.804"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="148dp"
         android:fontFamily="@font/silkscreen"
         android:text="first name"
         android:textColor="#000000"
         android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintHorizontal_bias="0.214"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
