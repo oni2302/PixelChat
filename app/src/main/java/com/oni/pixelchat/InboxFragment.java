@@ -1,6 +1,7 @@
 package com.oni.pixelchat;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,13 +22,17 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,9 +41,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.oni.pixelchat.databinding.FragmentInboxBinding;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -58,6 +67,8 @@ public class InboxFragment extends Fragment {
     int amountMessase = 20;
     int messageIncrease = 20;
     FrameLayout frameGetImage;
+
+    String imageFilePath="";
     boolean isShowImage = false;
     public InboxFragment() {
         // Required empty public constructor
@@ -68,6 +79,7 @@ public class InboxFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,13 +101,8 @@ public class InboxFragment extends Fragment {
         message_box.setAdapter(adapter);
         // Inflate the layout for this fragment
         btn_send = binding.btnInboxSend;
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Date date = new Date();
-                SendMessage(edt_inbox_message.getText().toString(),date.getTime());
-            }
-        });
+
+
         ReadMessage();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -110,31 +117,68 @@ public class InboxFragment extends Fragment {
 
 
 
+        recycler_grid_image = binding.recyclerGridImage;
         imageArrayList = new ArrayList<>();
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(binding.getRoot().getContext(),3);
+        RecyclerView.LayoutManager layoutManager = gridLayoutManager;
+        recycler_grid_image.setLayoutManager(layoutManager);
+        Recycler_Grid_Img_Adapter adapterGrid = new Recycler_Grid_Img_Adapter(binding.getRoot().getContext(),R.layout.recycler_grid_image_item,imageArrayList);
+        recycler_grid_image.setAdapter(adapterGrid);
+
         frameGetImage = binding.frameGetImgInbox;
         frameGetImage.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
                 if(isShowImage){
-                    imageArrayList = new ArrayList<>();
-                    adapter.notifyDataSetChanged();
                     recycler_grid_image.setVisibility(View.GONE);
+                    imageArrayList.clear();
+                    Recycler_Grid_Img_Adapter adapterGrid = new Recycler_Grid_Img_Adapter(binding.getRoot().getContext(),R.layout.recycler_grid_image_item,imageArrayList);
+                    recycler_grid_image.setAdapter(adapterGrid);
                 }else{
-                    imageArrayList = ImagePicker();
-                    adapter.notifyDataSetChanged();
+                    View view = getActivity().getCurrentFocus();
+                    if(view!=null) {
+                        InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     recycler_grid_image.setVisibility(View.VISIBLE);
+                    imageArrayList = ImagePicker();
+                    Recycler_Grid_Img_Adapter adapterGrid = new Recycler_Grid_Img_Adapter(binding.getRoot().getContext(),R.layout.recycler_grid_image_item,imageArrayList);
+                    recycler_grid_image.setAdapter(adapterGrid);
                 }
                 isShowImage = !isShowImage;
             }
         });
-        recycler_grid_image = binding.recyclerGridImage;
-        recycler_grid_image.setVisibility(View.VISIBLE);
-        imageArrayList = ImagePicker();
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(binding.getRoot().getContext(),3);
-        recycler_grid_image.setLayoutManager(layoutManager);
-        Recycler_Grid_Img_Adapter adapter = new Recycler_Grid_Img_Adapter(binding.getRoot().getContext(),R.layout.recycler_grid_image_item,imageArrayList);
-        recycler_grid_image.setAdapter(adapter);
+
+
+        edt_inbox_message.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(isShowImage){
+                    recycler_grid_image.setVisibility(View.GONE);
+                    imageArrayList.clear();
+                    Recycler_Grid_Img_Adapter adapterGrid = new Recycler_Grid_Img_Adapter(binding.getRoot().getContext(),R.layout.recycler_grid_image_item,imageArrayList);
+                    recycler_grid_image.setAdapter(adapterGrid);
+                }
+                isShowImage = !isShowImage;
+                return false;
+            }
+        });
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageFilePath = Recycler_Grid_Img_Adapter.filePath;
+                if(imageFilePath=="") {
+                    if (!"".equals(edt_inbox_message.getText().toString())) {
+                        SendMessage(edt_inbox_message.getText().toString(), System.currentTimeMillis());
+                        edt_inbox_message.setText("");
+                    }
+                }else{
+                    SendMessage(imageFilePath,System.currentTimeMillis(),true);
+                }
+
+            }
+        });
         return binding.getRoot();
     }
     public void ReadMessage(){
@@ -205,6 +249,33 @@ public class InboxFragment extends Fragment {
         messageItem = new MessageItem(message,false,false,date);
         reference = database.getReference("Messages").child(uid).child(firebaseUser.getUid());
         reference.push().setValue(messageItem);
+        amountMessase = 20;
+    }
+    public void SendMessage(String message,long date,boolean pic){
+        MessageItem messageItem = new MessageItem(message,true,true,date);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Messages").child(firebaseUser.getUid()).child(uid);
+        DatabaseReference pushRef =  reference.push();
+        pushRef.setValue(messageItem);
+        messageItem = new MessageItem(message,false,true,date);
+        reference = database.getReference("Messages").child(uid).child(firebaseUser.getUid());
+        reference.child(pushRef.getKey()).setValue(messageItem);
+
+        Uri uri = Uri.fromFile(new File(message));
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference("Messages");
+        StorageReference saveReference =  storageReference.child(pushRef.getKey()).child(System.currentTimeMillis()+"");
+        saveReference.putFile(uri).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d("SAVE_To_Fire","Xong");
+            }
+        });
         amountMessase = 20;
     }
 

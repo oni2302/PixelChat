@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     android:paddingLeft="1dp"
     android:paddingRight="1dp"
     android:paddingBottom="2dp">
@@ -11,7 +12,8 @@
     <FrameLayout
         android:id="@+id/layout"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:srcCompat="@tools:sample/avatars" />
 
         <CheckBox
@@ -30,8 +32,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="bottom|right"
-            android:checked="false"
-            android:clickable="false" />
+            android:checked="false" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

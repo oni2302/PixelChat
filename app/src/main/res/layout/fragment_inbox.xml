@@ -78,6 +78,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:background="#FFFFFF"
+                android:clickable="true"
                 android:ems="10"
                 android:fontFamily="@font/vt323"
                 android:hint="Nhắn tin"
