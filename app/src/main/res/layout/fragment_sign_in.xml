@@ -8,10 +8,11 @@
     tools:context=".SignIn_Fragment">
 
     <FrameLayout
-        android:layout_width="274dp"
+        android:layout_width="280dp"
         android:layout_height="47dp"
         android:layout_gravity="left"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -100,12 +101,12 @@
 
     <FrameLayout
         android:id="@+id/frameLayout4"
-        android:layout_width="305dp"
+        android:layout_width="280dp"
         android:layout_height="50dp"
         android:layout_gravity="left"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 

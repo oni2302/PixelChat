@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pixel_size">4dp</dimen>
-    <dimen name="pixel_margin">8dp</dimen>
+    <dimen name="pixel_size">2dp</dimen>
+    <dimen name="pixel_margin">4dp</dimen>
     <dimen name="message_margin">100dp</dimen>
     <dimen name="zero_dp">0dp</dimen>
     <dimen name="five_dp">5dp</dimen>
+    <dimen name="pixel_size_sm">1dp</dimen>
+    <dimen name="pixel_margin_sm">2dp</dimen>
 
 </resources>

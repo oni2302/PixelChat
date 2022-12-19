@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<fragment class="com.oni.pixelchat.LoginFragment"
-    android:name="com.oni.pixelchat.LoginFragment"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:layout="@layout/layout_login"
-    xmlns:tools="http://schemas.android.com/tools" />

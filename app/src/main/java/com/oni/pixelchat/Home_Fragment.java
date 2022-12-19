@@ -35,7 +35,7 @@ public class Home_Fragment extends Fragment {
     private FragmentHomeBinding binding;
     private CardView avatar_warping;
     private RecyclerView recyclerView;
-
+    private CardView btnSetting;
     LinearLayoutManager layoutManager;
     private ArrayList<User> userArrayList;
     private InboxItemAdapter inboxItemAdapter;
@@ -56,6 +56,14 @@ public class Home_Fragment extends Fragment {
         mUser= FirebaseAuth.getInstance().getCurrentUser();
         uid = FirebaseAuth.getInstance().getUid();
         // Inflate the layout for this fragment
+        btnSetting = binding.btnSetting;
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment f = new InfoFragment();
+                DisplayFragment(f);
+            }
+        });
         tv_home_displayname = binding.tvHomeDisplayname;
         Date dt = new Date();
         int hour = (int)(dt.getTime()/3600000)%24+7;
@@ -76,16 +84,6 @@ public class Home_Fragment extends Fragment {
         inboxItemAdapter = new InboxItemAdapter(Home_Fragment.this.getContext(),R.layout.inbox_message_recycler_item,userArrayList);
         recyclerView.setAdapter(inboxItemAdapter);
         ReadUsers();
-        btn_home_sign_out = binding.btnHomeSignOut;
-        btn_home_sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                Fragment f = new SignIn_Fragment();
-                DisplayFragment(f);
-            }
-        });
         return binding.getRoot();
     }
     private void DisplayFragment(Fragment fragment){
@@ -96,7 +94,7 @@ public class Home_Fragment extends Fragment {
                         R.anim.fade_out,
                         R.anim.fade_in,
                         R.anim.slide_out
-                );
+                ).addToBackStack("Home-setting");
 
         fragmentTransaction.replace(R.id.container_main_activity,fragment);
         fragmentTransaction.commit();

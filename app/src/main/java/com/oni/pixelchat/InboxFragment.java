@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -170,11 +171,14 @@ public class InboxFragment extends Fragment {
                 imageFilePath = Recycler_Grid_Img_Adapter.filePath;
                 if(imageFilePath=="") {
                     if (!"".equals(edt_inbox_message.getText().toString())) {
-                        SendMessage(edt_inbox_message.getText().toString(), System.currentTimeMillis());
+                        String mess = edt_inbox_message.getText().toString();
+                        Log.d("Content_Mess",mess);
+                        SendMessage(mess, System.currentTimeMillis());
                         edt_inbox_message.setText("");
                     }
                 }else{
                     SendMessage(imageFilePath,System.currentTimeMillis(),true);
+                    Recycler_Grid_Img_Adapter.filePath = "";
                 }
 
             }
@@ -189,15 +193,16 @@ public class InboxFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<MessageItem> messageList = new ArrayList<>();
-                arrayList.clear();
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                int lastSize = arrayList.size();
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
                     Log.d("DATA",dataSnapshot.getValue().toString());
                     MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
                     messageList.add(messageItem);
                 }
-                for (int i =1 ;i<=arrayList.size();i++){messageList.remove(messageList.size()-1);}
-                arrayList.addAll(0,messageList);
-                adapter.notifyDataSetChanged();
+                for (int i =1 ; i<=arrayList.size();i++){messageList.remove(0);}
+                arrayList.addAll(arrayList.size(),messageList);
+                Log.d("Message" ,arrayList.toString());
+                adapter.notifyItemRangeInserted(lastSize,messageList.size());
             }
 
             @Override
@@ -249,22 +254,19 @@ public class InboxFragment extends Fragment {
         messageItem = new MessageItem(message,false,false,date);
         reference = database.getReference("Messages").child(uid).child(firebaseUser.getUid());
         reference.push().setValue(messageItem);
-        amountMessase = 20;
+        amountMessase++;
     }
     public void SendMessage(String message,long date,boolean pic){
-        MessageItem messageItem = new MessageItem(message,true,true,date);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("Messages").child(firebaseUser.getUid()).child(uid);
-        DatabaseReference pushRef =  reference.push();
-        pushRef.setValue(messageItem);
-        messageItem = new MessageItem(message,false,true,date);
-        reference = database.getReference("Messages").child(uid).child(firebaseUser.getUid());
-        reference.child(pushRef.getKey()).setValue(messageItem);
+
+        DatabaseReference refSend = database.getReference("Messages").child(firebaseUser.getUid()).child(uid).push();
+        DatabaseReference refReceive = database.getReference("Messages").child(uid).child(firebaseUser.getUid()).child(refSend.getKey());
+
 
         Uri uri = Uri.fromFile(new File(message));
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference("Messages");
-        StorageReference saveReference =  storageReference.child(pushRef.getKey()).child(System.currentTimeMillis()+"");
+        StorageReference saveReference =  storageReference.child(refSend.getKey()).child(System.currentTimeMillis()+"");
         saveReference.putFile(uri).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
@@ -273,10 +275,23 @@ public class InboxFragment extends Fragment {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> task = taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String imageUrlPath = uri.toString();
+                        Log.d("SAVE_To_Fire",imageUrlPath);
+
+                        MessageItem messageItem = new MessageItem(imageUrlPath,true,true,date);
+                        refSend.setValue(messageItem);
+                        messageItem = new MessageItem(imageUrlPath,false,true,date);
+                        refReceive.setValue(messageItem);
+                    }
+                });
                 Log.d("SAVE_To_Fire","Xong");
             }
         });
-        amountMessase = 20;
+        amountMessase++;
+
     }
 
 
