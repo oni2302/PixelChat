@@ -58,7 +58,7 @@ public class InboxFragment extends Fragment {
     LinearLayoutManager layoutManager;
     ArrayList<MessageItem> arrayList;
     MessageInboxAdapter adapter;
-    ImageView btn_send;
+    ImageView btn_send,back;
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
     String uid;
@@ -102,8 +102,14 @@ public class InboxFragment extends Fragment {
         message_box.setAdapter(adapter);
         // Inflate the layout for this fragment
         btn_send = binding.btnInboxSend;
+        back = binding.back;
 
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         ReadMessage();
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
